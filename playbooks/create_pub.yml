@@ -1,0 +1,8 @@
+---
+- name: Install NATS pub
+  hosts: nats-pub
+  become: yes
+  tasks:
+    import_role:
+      name: nats
+      tasks_from: pub

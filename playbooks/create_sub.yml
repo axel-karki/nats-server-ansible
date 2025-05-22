@@ -1,0 +1,8 @@
+---
+- name: Install NATS sub
+  hosts: nats-sub
+  become: yes
+  tasks:
+    import_role:
+      name: nats
+      tasks_from: sub

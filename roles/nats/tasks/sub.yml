@@ -1,0 +1,35 @@
+- name: Install unzip and curl
+  apt:
+    name:
+      - unzip
+      - curl
+    state: present
+    update_cache: yes
+
+- name: Download NATS CLI
+  get_url:
+    url: "https://github.com/nats-io/natscli/releases/latest/download/nats-{{ ansible_system }}-{{ ansible_architecture }}.zip"
+    dest: "/tmp/natscli.zip"
+
+- name: Unzip NATS CLI
+  unarchive:
+    src: "/tmp/natscli.zip"
+    dest: "/tmp/natscli"
+    remote_src: yes
+
+- name: Install NATS CLI binary
+  copy:
+    src: "/tmp/natscli/nats"
+    dest: "/usr/local/bin/nats"
+    mode: '0755'
+
+- name: Create subscriber script
+  copy:
+    dest: /usr/local/bin/nats-sub.sh
+    mode: '0755'
+    content: |
+      #!/bin/bash
+      nats sub updates -s nats://{{ nats_server_ip }}:4222
+
+- name: Run subscriber script as background service
+  shell: nohup /usr/local/bin/nats-sub.sh > /var/log/nats-subscriber.log 2>&1 &

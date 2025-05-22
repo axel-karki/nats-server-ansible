@@ -12,3 +12,5 @@ nats_auth_users:
   password: 123
 nats_jetstream_max_mem_store: 1Gb
 nats_jetstream_max_file_store: 10Gb
+
+nats_server_ip: 10.0.0.20
