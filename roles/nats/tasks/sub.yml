@@ -21,7 +21,7 @@
     mode: '0755'
     content: |
       #!/bin/bash
-      nats pub updates "Hello from publisher!" -s nats://admin:123@{{ nats_server_ip }}:4222
+      nats sub updates -s nats://admin:123@<nats-server-ip>:4222
 
 
 - name: Run subscriber script as background service

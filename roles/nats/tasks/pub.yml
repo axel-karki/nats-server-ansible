@@ -21,7 +21,7 @@
     mode: '0755'
     content: |
       #!/bin/bash
-      nats pub updates "Hello from publisher!" -s nats://{{ nats_server_ip }}:4222
+      nats pub updates "Hello from publisher!" -s nats://admin:123@{{ nats_server_ip }}:4222
 
 - name: Run publisher once
   shell: bash /usr/local/bin/nats-pub.sh
