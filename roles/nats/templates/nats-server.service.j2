@@ -1,0 +1,12 @@
+[Unit]
+Description=NATS Server
+After=network.target
+
+[Service]
+User={{ nats_user }}
+Group={{ nats_group }}
+ExecStart={{ nats_install_dir }}/nats-server -c {{ nats_config_file }}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

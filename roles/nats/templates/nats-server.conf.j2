@@ -1,0 +1,17 @@
+jetstream {
+  store_dir: "{{ nats_data_dir }}"
+  max_mem_store: {{ nats_jetstream_max_mem_store }}
+  max_file_store: {{ nats_jetstream_max_file_store }}
+}
+
+server_name: "{{ nats_server_name }}"
+listen: {{ nats_listen_addr }}
+http: {{ nats_http_port }}
+
+authorization {
+  users = [
+    {% for user in nats_auth_users %}
+    { user: "{{ user.user }}", password: "{{ user.password }}" }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}

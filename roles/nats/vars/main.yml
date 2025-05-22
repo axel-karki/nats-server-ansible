@@ -1,0 +1,14 @@
+nats_version: 2.10.20
+nats_user: nats
+nats_group: nats
+nats_install_dir: /usr/local/bin
+nats_data_dir: /var/lib/nats
+nats_config_file: /etc/nats/nats-server.conf
+nats_server_name: nats-server-01
+nats_listen_addr: 0.0.0.0:4222
+nats_http_port: 8222
+nats_auth_users:
+- user: admin
+  password: 123
+nats_jetstream_max_mem_store: 1Gb
+nats_jetstream_max_file_store: 10Gb

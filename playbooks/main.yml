@@ -1,0 +1,6 @@
+---
+- name: Install NATS with JetStream enabled
+  hosts: nats-server
+  become: yes
+  roles:
+    - nats

@@ -1,0 +1,67 @@
+
+---
+- name: Ensure NATS user exists
+  user:
+    name: "{{ nats_user }}"
+    system: yes
+    create_home: no
+    shell: /sbin/nologin
+
+- name: Download NATS server binary
+  get_url:
+    url: "https://github.com/nats-io/nats-server/releases/download/v{{ nats_version }}/nats-server-v{{ nats_version }}-linux-amd64.tar.gz"
+    dest: "/tmp/nats-server.tar.gz"
+    mode: '0644'
+
+- name: Extract NATS server binary
+  unarchive:
+    src: "/tmp/nats-server.tar.gz"
+    dest: "/tmp/"
+    remote_src: yes
+    creates: "/tmp/nats-server-v{{ nats_version }}-linux-amd64/nats-server"
+
+- name: Move nats-server binary to install directory
+  copy:
+    remote_src: yes
+    src: "/tmp/nats-server-v{{ nats_version }}-linux-amd64/nats-server"
+    dest: "{{ nats_install_dir }}/nats-server"
+    mode: '0755'
+
+- name: Create NATS data directory for JetStream
+  file:
+    path: "{{ nats_data_dir }}"
+    state: directory
+    owner: "{{ nats_user }}"
+    group: "{{ nats_group }}"
+    mode: '0750'
+
+- name: Create NATS config directory
+  file:
+    path: "/etc/nats"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Deploy NATS server configuration file
+  template:
+    src: "nats-server.conf.j2"
+    dest: "{{ nats_config_file }}"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Create systemd service file for NATS server
+  template:
+    src: "nats-server.service.j2"
+    dest: /etc/systemd/system/nats-server.service
+    mode: '0644'
+
+- name: Reload systemd daemon
+  command: systemctl daemon-reload
+
+- name: Enable and start NATS server service
+  systemd:
+    name: nats-server
+    enabled: yes
+    state: started
