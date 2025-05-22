@@ -3,6 +3,6 @@
   hosts: nats-pub
   become: yes
   tasks:
-    import_role:
-      name: nats
-      tasks_from: pub
+    - import_role:
+        name: nats
+        tasks_from: pub
