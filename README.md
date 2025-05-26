@@ -29,7 +29,7 @@
   * One VM runs the **Subscriber**
 * The **Publisher VM** sends messages to the **Subscriber VM** via the **NATS server**.
 
-<img width="288" alt="Screenshot 2025-05-26 at 6 19 57 AM" src="https://github.com/user-attachments/assets/07445b1b-c1be-469b-bd0c-3da20e94db46" />
+<img width="288" alt="Messaging System Demo" src="https://github.com/user-attachments/assets/07445b1b-c1be-469b-bd0c-3da20e94db46" />
 
 ---
 
