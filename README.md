@@ -64,6 +64,10 @@
 
 ---
 
+https://github.com/user-attachments/assets/598277d8-22ee-4899-b9c5-2ce0d20090d6
+
+---
+
 ## Configuration Security
 
 Edit the password in:
