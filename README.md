@@ -100,3 +100,4 @@ ansible-playbook playbooks/main.yml --vault-password-file ~/.vault_pass.txt
 ```
 ssh -i <ssh_file_path> -L 8080:<nats_vm_server_private_ip>:8222 root@<server_public_ip>
 ```
+<img width="858" alt="Screenshot 2025-05-26 at 6 23 39 AM" src="https://github.com/user-attachments/assets/c74e04db-d2d1-43f2-a41a-395061edefb4" />
